@@ -1,0 +1,4 @@
+[
+  { "nombre": "Casa Pepe", "lat": 36.8381, "lng": -2.4597, "tipo": "Tapas", "web": "https://ejemplo.com" },
+  { "nombre": "El Puerto", "lat": 36.8340, "lng": -2.4637, "tipo": "Pescado" }
+]

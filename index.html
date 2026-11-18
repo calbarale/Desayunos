@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Restaurantes</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>html, body, #mapa { height: 100%; margin: 0; }</style>
+</head>
+<body>
+  <div id="mapa"></div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const mapa = L.map('mapa').setView([36.8381, -2.4597], 13);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap'
+    }).addTo(mapa);
+
+    fetch('restaurantes.json')
+      .then(r => r.json())
+      .then(lista => lista.forEach(r => {
+        L.marker([r.lat, r.lng])
+          .addTo(mapa)
+          .bindPopup(`<b>${r.nombre}</b><br>${r.tipo}`);
+      }));
+  </script>
+</body>
+</html>
