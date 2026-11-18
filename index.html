@@ -11,20 +11,45 @@
   <div id="mapa"></div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    const mapa = L.map('mapa').setView([36.8381, -2.4597], 13);
+  const mapa = L.map('mapa').setView([36.8381, -2.4597], 13);
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '© OpenStreetMap'
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+  }).addTo(mapa);
+
+  // Restaurantes
+  fetch('restaurantes.json')
+    .then(r => r.json())
+    .then(lista => lista.forEach(r => {
+      L.marker([r.lat, r.lng])
+        .addTo(mapa)
+        .bindPopup(`<b>${r.nombre}</b><br>${r.tipo}`);
+    }));
+
+  // Ubicación actual
+  let marcadorYo, circuloPrecision;
+
+  mapa.on('locationfound', e => {
+    if (marcadorYo) mapa.removeLayer(marcadorYo);
+    if (circuloPrecision) mapa.removeLayer(circuloPrecision);
+
+    marcadorYo = L.circleMarker(e.latlng, {
+      radius: 8, color: '#fff', weight: 2,
+      fillColor: '#1a73e8', fillOpacity: 1
+    }).addTo(mapa).bindPopup('Estás aquí');
+
+    circuloPrecision = L.circle(e.latlng, {
+      radius: e.accuracy, color: '#1a73e8', weight: 1, fillOpacity: 0.1
     }).addTo(mapa);
+  });
 
-    fetch('restaurantes.json')
-      .then(r => r.json())
-      .then(lista => lista.forEach(r => {
-        L.marker([r.lat, r.lng])
-          .addTo(mapa)
-          .bindPopup(`<b>${r.nombre}</b><br>${r.tipo}`);
-      }));
-  </script>
+  mapa.on('locationerror', e => {
+    alert('No se pudo obtener tu ubicación: ' + e.message);
+  });
+
+  // setView: true centra el mapa en tu posición; watch: true la actualiza al moverte
+  mapa.locate({ setView: true, maxZoom: 15, watch: true, enableHighAccuracy: true });
+</script>
 </body>
 </html>
