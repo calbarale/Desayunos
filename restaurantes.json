@@ -1,4 +1,39 @@
 [
-  { "nombre": "Casa Pepe", "lat": 36.8381, "lng": -2.4597, "tipo": "Tapas", "web": "https://ejemplo.com" },
-  { "nombre": "El Puerto", "lat": 36.8340, "lng": -2.4637, "tipo": "Pescado" }
+  {
+    "nombre": "Cafetería de ejemplo 1",
+    "tipo": "Tostadas",
+    "direccion": "Calle de ejemplo 1, Almería",
+    "lat": 36.8381,
+    "lng": -2.4597,
+    "nota": "Sustituye estos datos por tus sitios reales."
+  },
+  {
+    "nombre": "Cafetería de ejemplo 2",
+    "tipo": "Bollería",
+    "direccion": "Calle de ejemplo 2, Almería",
+    "lat": 36.8445,
+    "lng": -2.4682
+  },
+  {
+    "nombre": "Cafetería de ejemplo 3",
+    "tipo": "Brunch",
+    "direccion": "Avenida de ejemplo 3, Almería",
+    "lat": 36.8329,
+    "lng": -2.4521,
+    "web": "https://ejemplo.com"
+  },
+  {
+    "nombre": "Cafetería de ejemplo 4",
+    "tipo": "Tostadas",
+    "direccion": "Plaza de ejemplo 4, Almería",
+    "lat": 36.8503,
+    "lng": -2.4439
+  },
+  {
+    "nombre": "Cafetería de ejemplo 5",
+    "tipo": "Churros",
+    "direccion": "Paseo de ejemplo 5, Almería",
+    "lat": 36.8287,
+    "lng": -2.4733
+  }
 ]
